@@ -1,0 +1,13 @@
+
+# Redirect all http and https trafic from tomes.lol to veselka.tomes.lol - the primary domain.
+[[redirects]]
+from = "http://tomes.lol/*"
+to = "http://veselka.tomes.lol/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "https://tomes.lol/*"
+to = "https://veselka.tomes.lol/:splat"
+status = 301
+force = true
