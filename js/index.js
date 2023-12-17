@@ -1,0 +1,74 @@
+const SPEED_VH_PER_S = 10;
+const IMAGES = Array.from(
+  document.getElementById("carousel").childNodes
+).filter((node) => node.nodeName == "IMG");
+const IMAGE_GAP_VH = 25;
+
+function computeClientHeight() {
+  return Math.max(
+    document.documentElement.clientHeight,
+    window.innerHeight || 0
+  );
+}
+
+let cachedClientHeight = computeClientHeight();
+window.addEventListener("resize", () => {
+  // Update our cached variables.
+  // Reference on what causes layout invalidation/reflow:
+  // https://gist.github.com/paulirish/5d52fb081b3570c81e3a/565c05680b27c9cfd9f5e971d295cd558c3e1843
+  cachedClientHeight = computeClientHeight();
+});
+
+function getOffsetCalculator(
+  seconds_elapsed,
+  pixels_per_second,
+  image_sizes,
+  image_gap
+) {
+  const total_image_size = image_sizes.reduce((acc, size) => acc + size, 0);
+  const max_image_size = image_sizes.reduce(
+    (max, size) => Math.max(max, size),
+    0
+  );
+  const carousel_size = total_image_size + image_gap * image_sizes.length;
+  const base_position = Math.floor(
+    (seconds_elapsed * pixels_per_second) % carousel_size
+  );
+
+  let combined_size = 0;
+  let n = 0;
+  return function (size) {
+    const position =
+      ((base_position + n * image_gap + combined_size) % carousel_size) -
+      max_image_size;
+
+    combined_size += size;
+    n += 1;
+
+    return position;
+  };
+}
+
+const start = Date.now();
+function draw() {
+  const now = Date.now();
+  const seconds_elapsed = (now - start) / 1000;
+  const pixels_per_second = (SPEED_VH_PER_S / 100) * cachedClientHeight;
+  const image_gap = (cachedClientHeight / 100) * IMAGE_GAP_VH;
+
+  let offsetCalculator = getOffsetCalculator(
+    seconds_elapsed,
+    pixels_per_second,
+    IMAGES.map((img) => img.height),
+    image_gap
+  );
+
+  IMAGES.forEach((image) => {
+    image.style["top"] = `${offsetCalculator(image.height)}px`;
+    // TODO: uncover the images only right before they should appear the first time
+  });
+
+  window.requestAnimationFrame(draw);
+}
+
+window.requestAnimationFrame(draw);
