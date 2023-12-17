@@ -13,3 +13,4 @@ This website is hosted on Netlify on the `veselka.tomes.lol` domain with `tomes.
 ## Resources
 
 - Design: https://www.icloud.com/freeform/0cf-8Ti3v08Lfx12djdzuwErw#svatba_web_layout
+- Content: https://docs.google.com/document/d/1c_VTWQb6hzY2z54AFeKpCow6pAV1fquiBrrt2vAPeKI/edit#heading=h.ebdg3iikiblj
