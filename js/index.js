@@ -1,5 +1,13 @@
-const SPEED_VH_PER_S = 10;
+/// Speed of the vertical scrolling in viewport-height percent per second
+const SPEED_VH_PER_S = 5;
+/// Gap between vertically scrolling images in viewport-height percent
 const IMAGE_GAP_VH = 25;
+/// The maximum degrees the images can rotate in one direction
+const MAX_ROTATION_DEG = 20;
+/// In how many steps the images cover [-MAX_ROTATION_DEG, MAX_ROTATION_DEG] range
+const ROTATION_STEPS = 2;
+/// How often does the images progress in the rotation
+const STEPS_PER_SECOND = 2;
 
 const IMAGES_LEFT = Array.from(
   document.getElementById("carousel-left").childNodes
@@ -51,6 +59,15 @@ function getOffsetCalculator(
   };
 }
 
+function computeRotation(now, steps_ahead) {
+  let ms_per_step = (1 / STEPS_PER_SECOND) * 1000;
+  let steps_since_epoch = Math.floor(now / ms_per_step);
+  let step = (steps_since_epoch + steps_ahead) % (2 * ROTATION_STEPS);
+  let step_wrapped = step < ROTATION_STEPS ? step : 2 * ROTATION_STEPS - step;
+  let degrees_per_step = (2 * MAX_ROTATION_DEG) / ROTATION_STEPS;
+  return step_wrapped * degrees_per_step - MAX_ROTATION_DEG;
+}
+
 const start = Date.now();
 function draw() {
   const now = Date.now();
@@ -65,8 +82,9 @@ function draw() {
     image_gap
   );
 
-  IMAGES_LEFT.forEach((image) => {
+  IMAGES_LEFT.forEach((image, n) => {
     image.style["top"] = `${offsetCalculatorLeft(image.height)}px`;
+    image.style["transform"] = `rotate(${computeRotation(now, n * 3)}deg)`;
     // TODO: uncover the images only right before they should appear the first time
   });
 
@@ -77,8 +95,9 @@ function draw() {
     image_gap
   );
 
-  IMAGES_RIGHT.forEach((image) => {
+  IMAGES_RIGHT.forEach((image, n) => {
     image.style["bottom"] = `${offsetCalculatorRight(image.height)}px`;
+    image.style["transform"] = `rotate(${computeRotation(now, n * 3)}deg)`;
     // TODO: uncover the images only right before they should appear the first time
   });
 
