@@ -58,17 +58,26 @@ a {
   color: var(--white);
 }
 
-#carousel {
+#carousel-left,
+#carousel-right {
   position: fixed;
   top: 0;
-  left: 0;
   height: 100lvh;
   width: var(--content-padding);
   --carousel-padding: 1rem;
   padding: 0 var(--carousel-padding);
 }
 
-#carousel > img {
+#carousel-left {
+  left: 0;
+}
+
+#carousel-right {
+  right: 0;
+}
+
+#carousel-left > img,
+#carousel-right > img {
   position: absolute;
   width: calc(var(--content-padding) - 2 * var(--carousel-padding));
 }

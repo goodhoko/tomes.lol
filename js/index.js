@@ -1,8 +1,13 @@
 const SPEED_VH_PER_S = 10;
-const IMAGES = Array.from(
-  document.getElementById("carousel").childNodes
-).filter((node) => node.nodeName == "IMG");
 const IMAGE_GAP_VH = 25;
+
+const IMAGES_LEFT = Array.from(
+  document.getElementById("carousel-left").childNodes
+).filter((node) => node.nodeName == "IMG");
+
+const IMAGES_RIGHT = Array.from(
+  document.getElementById("carousel-right").childNodes
+).filter((node) => node.nodeName == "IMG");
 
 function computeClientHeight() {
   return Math.max(
@@ -13,9 +18,6 @@ function computeClientHeight() {
 
 let cachedClientHeight = computeClientHeight();
 window.addEventListener("resize", () => {
-  // Update our cached variables.
-  // Reference on what causes layout invalidation/reflow:
-  // https://gist.github.com/paulirish/5d52fb081b3570c81e3a/565c05680b27c9cfd9f5e971d295cd558c3e1843
   cachedClientHeight = computeClientHeight();
 });
 
@@ -56,15 +58,27 @@ function draw() {
   const pixels_per_second = (SPEED_VH_PER_S / 100) * cachedClientHeight;
   const image_gap = (cachedClientHeight / 100) * IMAGE_GAP_VH;
 
-  let offsetCalculator = getOffsetCalculator(
+  let offsetCalculatorLeft = getOffsetCalculator(
     seconds_elapsed,
     pixels_per_second,
-    IMAGES.map((img) => img.height),
+    IMAGES_LEFT.map((img) => img.height),
     image_gap
   );
 
-  IMAGES.forEach((image) => {
-    image.style["top"] = `${offsetCalculator(image.height)}px`;
+  IMAGES_LEFT.forEach((image) => {
+    image.style["top"] = `${offsetCalculatorLeft(image.height)}px`;
+    // TODO: uncover the images only right before they should appear the first time
+  });
+
+  let offsetCalculatorRight = getOffsetCalculator(
+    seconds_elapsed,
+    pixels_per_second,
+    IMAGES_RIGHT.map((img) => img.height),
+    image_gap
+  );
+
+  IMAGES_RIGHT.forEach((image) => {
+    image.style["bottom"] = `${offsetCalculatorRight(image.height)}px`;
     // TODO: uncover the images only right before they should appear the first time
   });
 
