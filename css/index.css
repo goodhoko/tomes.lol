@@ -1,21 +1,64 @@
+html {
+  --pink: #ef939b;
+  --red: #f93f38;
+  --white: #ffffff;
+
+  --max-content-width: 800px;
+  --min-content-padding: 100px;
+  --content-width: min(
+    var(--max-content-width),
+    calc(100vw - var(--min-content-padding) * 2)
+  );
+  --content-padding: calc(50vw - var(--content-width) / 2);
+}
+
 body {
   font-family: "Helvetica Neue", sans-serif;
   font-weight: bold;
-  font-size: 21;
+  font-size: 1.2rem;
   text-align: center;
-  background-color: #345639;
-  color: #ef939b;
+  background-color: var(--pink);
+  color: var(--red);
+
+  display: grid;
+  padding-top: 5rem;
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
 }
 
-h1 {
-  font-size: 20;
+h1,
+h2 {
+  font-size: 2rem;
 }
 
 #content {
-  max-width: calc(min(90vw, 800px));
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #content > * {
   margin-bottom: 2rem;
+}
+
+#content > :last-child {
+  margin-bottom: 20rem;
+}
+
+#heading {
+  width: 70%;
+  margin-bottom: 4rem;
+}
+
+#rolka {
+  width: 300px;
+}
+
+a {
+  color: var(--white);
+}
+
+#impressum {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
 }
