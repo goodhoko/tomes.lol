@@ -1,0 +1,21 @@
+body {
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 21;
+  text-align: center;
+  background-color: #345639;
+  color: #ef939b;
+}
+
+h1 {
+  font-size: 20;
+}
+
+#content {
+  max-width: calc(min(90vw, 800px));
+  margin: 0 auto;
+}
+
+#content > * {
+  margin-bottom: 2rem;
+}
