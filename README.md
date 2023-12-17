@@ -6,6 +6,14 @@ Wedding website for Tom & Eš - TomEš.
 
 Just run a http server in this directory. There's no build step required.
 
+### TODO
+
+- [] optimize images
+- [] OG meta tags
+- [] mobile layout
+- [] responsive typography
+- [] nice touches: selected text color,
+
 ## Deployment
 
 This website is hosted on Netlify on the `veselka.tomes.lol` domain with `tomes.lol` redirecting there too.
