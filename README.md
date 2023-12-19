@@ -13,6 +13,7 @@ Just run a http server in this directory. There's no build step required.
 - [] mobile layout
 - [] responsive typography
 - [] nice touches: selected text color,
+- [] try better fitting font, like eg. https://fonts.google.com/specimen/Rubik
 
 ## Deployment
 

@@ -10,6 +10,8 @@ html {
     calc(100vw - var(--min-content-padding) * 2)
   );
   --content-padding: calc(50vw - var(--content-width) / 2);
+  --carousel-width: var(--content-padding);
+  --carousel-padding: 1rem;
 }
 
 body {
@@ -63,8 +65,7 @@ a {
   position: fixed;
   top: 0;
   height: 100lvh;
-  width: var(--content-padding);
-  --carousel-padding: 1rem;
+  width: var(--carousel-width);
   padding: 0 var(--carousel-padding);
 }
 
@@ -79,10 +80,22 @@ a {
 #carousel-left > img,
 #carousel-right > img {
   position: absolute;
-  width: calc(var(--content-padding) - 2 * var(--carousel-padding));
+  width: calc(var(--carousel-width) - 2 * var(--carousel-padding));
 }
 
 #impressum {
   margin-bottom: 1rem;
   font-size: 0.8rem;
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    --content-width: 80vw;
+    --content-padding: calc(50vw - var(--content-width) / 2);
+    --carousel-width: 8rem;
+  }
+
+  body {
+    font-size: 1.1rem;
+  }
 }
