@@ -9,7 +9,7 @@ Just run a http server in this directory. There's no build step required.
 ### TODO
 
 - [x] optimize images
-- [] OG meta tags
+- [x] OG meta tags
 - [x] mobile layout
 - [x] responsive typography
 - [] nice touches: selected text color,
