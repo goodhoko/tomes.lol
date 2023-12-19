@@ -127,6 +127,10 @@ a {
 }
 
 @media screen and (max-width: 600px) {
+  #heading {
+    width: 100%;
+  }
+
   html {
     --content-width: 80vw;
     --content-padding: calc(50vw - var(--content-width) / 2);
