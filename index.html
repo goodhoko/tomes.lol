@@ -58,7 +58,16 @@
         Nedočkavce a všechny spřízněné duše rádi uvidíme už v pátek!
       </p>
 
-      <p>TODO: odkaz na formulář</p>
+      <p>
+        Vyplň nám, prosím, svůj aktuální e-mail - přijde Ti <i>dotazníček</i>,
+        který nám pomůže domyslet detaily, a postupně i bližší info, znáš to.
+      </p>
+
+      <form id="email-form">
+        <input type="email" id="email-input" required placeholder="e-mail" />
+        <input type="submit" id="submit-button" value="Poslat!" />
+        <p id="success-message">Máme to. Dík!</p>
+      </form>
 
       <img
         id="rolka"
@@ -161,6 +170,7 @@
       <img src="/images/pes.webp" />
     </div>
 
+    <script src="/js/submit_form.js"></script>
     <script src="/js/animation.js"></script>
   </body>
 </html>

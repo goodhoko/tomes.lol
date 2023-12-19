@@ -60,6 +60,43 @@ a {
   color: var(--white);
 }
 
+#email-form {
+  width: 100%;
+}
+
+#email-form > * {
+  margin-bottom: 1rem;
+}
+
+#email-input {
+  border: none;
+  border-radius: 5px;
+  background-color: var(--white);
+  color: var(--red);
+  height: 3rem;
+  width: calc(min(100%, 500px));
+  padding-left: 1rem;
+}
+
+#submit-button {
+  border: none;
+  border-radius: 5px;
+  background-color: var(--red);
+  color: var(--white);
+  height: 3rem;
+  width: calc(min(100%, 500px));
+  cursor: pointer;
+}
+
+#submit-button:disabled {
+  cursor: default;
+  opacity: 60%;
+}
+
+#success-message {
+  visibility: hidden;
+}
+
 #carousel-left,
 #carousel-right {
   position: fixed;
@@ -67,6 +104,7 @@ a {
   height: 100lvh;
   width: var(--carousel-width);
   padding: 0 var(--carousel-padding);
+  pointer-events: none;
 }
 
 #carousel-left {
