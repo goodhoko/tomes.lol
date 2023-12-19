@@ -8,7 +8,7 @@ Just run a http server in this directory. There's no build step required.
 
 ### TODO
 
-- [] optimize images
+- [x] optimize images
 - [] OG meta tags
 - [x] mobile layout
 - [x] responsive typography
