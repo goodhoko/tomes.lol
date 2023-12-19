@@ -10,8 +10,8 @@ Just run a http server in this directory. There's no build step required.
 
 - [] optimize images
 - [] OG meta tags
-- [] mobile layout
-- [] responsive typography
+- [x] mobile layout
+- [x] responsive typography
 - [] nice touches: selected text color,
 - [] try better fitting font, like eg. https://fonts.google.com/specimen/Rubik
 
