@@ -47,6 +47,15 @@ h2 {
   margin-bottom: 20rem;
 }
 
+#content small {
+  align-self: end;
+}
+
+/* remove bottom margin from paragraphs directly followed by <small> */
+#content p:has(+ small) {
+  margin-bottom: 0;
+}
+
 #heading {
   width: 70%;
   margin-bottom: 4rem;
