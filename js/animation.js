@@ -45,15 +45,12 @@ function getOffsetCalculator(
     (seconds_elapsed * pixels_per_second) % carousel_size
   );
 
-  let combined_size = 0;
-  let n = 0;
+  let offset = 0;
   return function (size) {
     const position =
-      ((base_position + n * image_gap + combined_size) % carousel_size) -
-      max_image_size;
+      ((base_position + offset) % carousel_size) - max_image_size;
 
-    combined_size += size;
-    n += 1;
+    offset += size + image_gap;
 
     return position;
   };
