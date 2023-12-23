@@ -29,7 +29,7 @@ window.addEventListener("resize", () => {
   cachedClientHeight = computeClientHeight();
 });
 
-function getOffsetCalculator(
+function* getOffsetCalculator(
   seconds_elapsed,
   pixels_per_second,
   image_sizes,
@@ -40,20 +40,18 @@ function getOffsetCalculator(
     (max, size) => Math.max(max, size),
     0
   );
+  // Total length of all the images and the gaps in between including the
+  // gap between the last and the first image (the carousel if wrapped).
   const carousel_size = total_image_size + image_gap * image_sizes.length;
-  const base_position = Math.floor(
-    (seconds_elapsed * pixels_per_second) % carousel_size
-  );
+  const base_offset = Math.floor(seconds_elapsed * pixels_per_second);
 
   let offset = 0;
-  return function (size) {
-    const position =
-      ((base_position + offset) % carousel_size) - max_image_size;
+  for (size of image_sizes) {
+    // Shift by the size of the largest image so that all images respawn outside the visible area.
+    yield ((base_offset + offset) % carousel_size) - max_image_size;
 
     offset += size + image_gap;
-
-    return position;
-  };
+  }
 }
 
 function computeRotation(now, steps_ahead) {
@@ -79,8 +77,11 @@ function draw() {
     image_gap
   );
 
-  IMAGES_LEFT.forEach((image, n) => {
-    image.style["top"] = `${offsetCalculatorLeft(image.height)}px`;
+  IMAGES_LEFT.map((image) => ({
+    image,
+    offset: offsetCalculatorLeft.next().value,
+  })).forEach(({ image, offset }, n) => {
+    image.style["top"] = `${offset}px`;
     image.style["transform"] = `rotate(${computeRotation(now, n * 3)}deg)`;
     // TODO: uncover the images only right before they should appear the first time
   });
@@ -92,8 +93,11 @@ function draw() {
     image_gap
   );
 
-  IMAGES_RIGHT.forEach((image, n) => {
-    image.style["bottom"] = `${offsetCalculatorRight(image.height)}px`;
+  IMAGES_RIGHT.map((image) => ({
+    image,
+    offset: offsetCalculatorRight.next().value,
+  })).forEach(({ image, offset }, n) => {
+    image.style["bottom"] = `${offset}px`;
     image.style["transform"] = `rotate(${computeRotation(now, n * 3)}deg)`;
     // TODO: uncover the images only right before they should appear the first time
   });
