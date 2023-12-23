@@ -34,7 +34,7 @@ document.getElementById("email-form").onsubmit = async (event) => {
     }
 
     console.log("Response ok:", response);
-
+    input.value = "";
     success_message.innerHTML = SUCCESS_MESSAGE;
     success_message.style.visibility = "visible";
   } catch (err) {
