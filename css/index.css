@@ -163,4 +163,10 @@ a {
   body {
     font-size: 1.1rem;
   }
+
+  /* Render images behind the text for better readability. */
+  #carousel-left,
+  #carousel-right {
+    z-index: -1;
+  }
 }
