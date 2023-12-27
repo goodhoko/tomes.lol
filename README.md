@@ -12,8 +12,8 @@ Just run a http server in this directory. There's no build step required.
 - [x] OG meta tags
 - [x] mobile layout
 - [x] responsive typography
-- [ ] nice touches: selected text color,
-- [ ] try better fitting font, like eg. https://fonts.google.com/specimen/Rubik
+- [x] nice touches: selected text color,
+- [x] try better fitting font, like eg. https://fonts.google.com/specimen/Rubik
 
 ## Deployment
 

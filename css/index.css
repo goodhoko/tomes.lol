@@ -28,6 +28,10 @@ html {
   --carousel-padding: 1rem;
 }
 
+::selection {
+  background: #3d6d23;
+}
+
 body {
   font-family: "Piazzolla", "Helvetica Neue", sans-serif;
   font-weight: bold;
